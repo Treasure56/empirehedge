@@ -22,29 +22,31 @@
             <div class="col">
                 <div class="card">
                     <div class="card-body">
-                        <h5>Deposit history</h5>
+                        <h5>Withdrawal history</h5>
                         <div class="table-responsive">
                             <table class="table text-center">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
                                         <th>Amount</th>
-                                        <th>Payment mode</th>
+                                        <th>Wallet Type</th>
+                                        <th>Wallet Address</th>
+                                        <th>Date Requested</th>
                                         <th>Status</th>
-                                        <th>Date created</th>
                                     </tr>
                                 </thead>
                                 <tbody>
 
                                     <?php
                                     $uid = $user['id'];
-                                    $query = mysqli_query($connect, "SELECT * FROM deposits WHERE user_id = '$uid' ORDER BY id DESC");
+                                    $query = mysqli_query($connect, "SELECT * FROM withdrawals WHERE user_id = '$uid' ORDER BY id DESC");
                                     if (mysqli_num_rows($query) > 0) {
                                         while ($row = mysqli_fetch_assoc($query)) {
                                             $id = $row['id'];
                                             $amount = $row['amount'];
-                                            $wallet_id = $row['wallet_id'];
-                                            $wallet = getQueryDetails($connect, "SELECT * FROM wallets WHERE id = '$wallet_id'");
+                                            $wallet_address = $row['wallet'];
+                                            $wallet_type = $row['wallet_type'];
+                                            // $wallet = getQueryDetails($connect, "SELECT * FROM wallets WHERE id = '$wallet_id'");
                                             $status = $row['pending'] == 1 ? 'Pending' : 'Completed';
                                             $date_created = $row['created_at'];
 
@@ -56,18 +58,21 @@
                                                     <?php echo $id; ?>
                                                 </td>
                                                 <td>
-                                                    <?php echo $amount; ?>
+                                                    $<?php echo formatAsMoney($amount); ?>
                                                 </td>
                                                 <td>
-                                                    <?php echo $wallet['title']; ?>
+                                                    <?php echo $wallet_type; ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $wallet_address; ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo formatDate($date_created); ?>
                                                 </td>
                                                 <td>
                                                     <p class="<?= $status == 'Pending' ? 'text-warning' : 'text-success' ?>">
                                                         <?php echo $status; ?>
                                                     </p>
-                                                </td>
-                                                <td>
-                                                    <?php echo formatDate($date_created); ?>
                                                 </td>
                                             </tr>
 
@@ -78,7 +83,7 @@
                                         <tr>
                                             <td class="py-5" colspan="4">
                                                 <i class="bi bi-database-fill-exclamation" style="font-size: 50px"></i>
-                                                <h5>No deposit history</h5>
+                                                <h5>No withdrawal history</h5>
                                             </td>
                                         </tr>
                                     <?php } ?>

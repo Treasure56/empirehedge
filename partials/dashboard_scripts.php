@@ -1405,7 +1405,8 @@ require_once 'partials/session.php'
         };
 
         function reloadPage() {
-            window.location = window.location.pathname;
+            window.location.reload();
+            // window.location = window.location.pathname;
         }
 
 
@@ -1591,7 +1592,7 @@ require_once 'partials/session.php'
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?= $path == 'manage_account' ? 'active' : '' ?>" href="manage_account.php">
+                        <a class="nav-link <?= $path == 'withdraw' ? 'active' : '' ?>" href="withdraw.php">
                             <i class="fi fi-sr-coins"></i>
                             <span>Withdraw</span>
                         </a>
@@ -1788,9 +1789,9 @@ require_once 'partials/session.php'
                 <!-- Dropdown -->
                 <div class="dropdown">
                     <a href="javascript: void(0);" class="dropdown-toggle no-arrow d-flex align-items-center justify-content-center bg-white rounded-circle shadow-sm mx-1 mx-lg-2 w-40px h-40px" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false" data-bs-offset="0,0">
-                        <div class="avatar avatar-circle avatar-sm avatar-online">
-                            <img src="../png.pngtree.com/png-vector/20220521/ourlarge/pngtree-avatar-profile-icon-png-image_4644647.png" alt="..." class="avatar-img" width="40" height="40">
-                        </div>
+                        <!-- <div class="avatar avatar-circle avatar-sm avatar-online"> -->
+                            <img src="https://png.pngtree.com/png-vector/20220521/ourlarge/pngtree-avatar-profile-icon-png-image_4644647.png" alt="..." class="avatar-img rounded-circle" width="40" height="40">
+                        <!-- </div> -->
                     </a>
 
                     <div class="dropdown-menu">
@@ -1812,7 +1813,7 @@ require_once 'partials/session.php'
                                 <a class="dropdown-item" href="deposit.php">
                                     Deposit
                                 </a>
-                                <a class="dropdown-item" href="withdrawal.php">
+                                <a class="dropdown-item" href="withdraw.php">
                                     Withdrawal request
                                 </a>
                             </div>

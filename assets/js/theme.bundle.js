@@ -1284,7 +1284,10 @@
           });
       }
       function e() {
-        window.location = window.location.pathname;
+        return;
+        console.log('hmmm')
+        window.location.reload()
+        // window.location = window.location;
       }
     })(),
     (() => {

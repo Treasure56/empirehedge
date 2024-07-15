@@ -2,36 +2,46 @@
 
 <?php
 $wallet;
-if (!isset($_GET['wallet_id']) || !isset($_GET['amount'])) {
+$money;
+$amount;
+if (isset($_GET['wallet_id']) && isset($_GET['amount'])) {
     $wallet = isset($_GET['wallet_id']) ? $_GET['wallet_id'] : '';
     $amount = isset($_GET['amount']) ? $_GET['amount'] : '';
 
     if ($wallet == "" && $amount == "") {
         $error = 'something went wrong';
-        header('Location: deposit.php?&error=' . $error);
+        echo "<h1>Something went Wrong!</h1>";
+        // header('Location: deposit.php?&error=' . $error);
         return false;
     }
 
     $wallet = sanitize($connect, $wallet);
-    $btc = sanitize($connect, $btc);
+    $amount = sanitize($connect, $amount);
     $uid = $user['id'];
 
     $sql = "SELECT * FROM wallets WHERE id = '$wallet'";
     $result = mysqli_query($connect, $sql);
     if (mysqli_num_rows($result) == 0) {
         $error = 'Wallet not found';
-        header('Location: deposit.php?error=' . $error);
+        echo "<h1>Something went Wrong!</h1>";
+        // header('Location: deposit.php?error=' . $error);
+
         return false;
     }
     if ($result) {
         $rows = mysqli_fetch_assoc($result);
         $wallet = $rows;
+        $money = formatAsMoney($amount);
     } else {
         $error = 'something went wrong';
-        header('Location: deposit.php?error=' . $error);
+        echo "<h1>Something went Wrong!</h1>";
+        // header('Location: deposit.php?error=' . $error);
+
         return false;
     }
 } else {
+
+    echo "<h1>Something went Wrong!</h1>";
     return false;
 }
 
@@ -64,15 +74,15 @@ if (!isset($_GET['wallet_id']) || !isset($_GET['amount'])) {
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="avatar avatar-lg text-bg-gray-300 d-flex align-items-center justify-content-center">
-                            <img src="https://res.cloudinary.com/dgzmeamz8/image/upload/v1696772175/usdc_ogjmnf.jpg" alt="" srcset="" width="42px" height="37px">
+                            <img src="image/<?= $wallet['img'] ?>" alt="" srcset="" width="42px" height="37px">
                         </div>
                         <div>
                             <h1 class="amtx"></h1>
                         </div>
                     </div>
                     <!-- Title -->
-                    <h3 class="card-title mt-3 mb-0 text-dark"> USDC TRC20</h3>
-                    <span class="text-muted m-0 p-0">Pay via USDC TRC20</span>
+                    <h3 class="card-title mt-3 mb-0 text-dark"> <?= $wallet['title'] ?></h3>
+                    <span class="text-muted m-0 p-0">Pay via <?= $wallet['title'] ?></span>
                 </div>
             </div>
         </div>
@@ -84,7 +94,7 @@ if (!isset($_GET['wallet_id']) || !isset($_GET['amount'])) {
                     <div class="card-body">
                         <div class="row">
                             <div class="col-lg-8 offset-lg-2" x-data="{
-                  address: 'TDU1iAxatb7qSezy78KBQQyAEFQxnHXJVW'.trim(),
+                  address: ' <?= $wallet['address'] ?>'.trim(),
                   copyToClipboard(text) {
                       if (!navigator.clipboard) {
                           return alert('Copying to clipboard only works on secure sites viewed through a modern browser.')
@@ -115,7 +125,7 @@ if (!isset($_GET['wallet_id']) || !isset($_GET['amount'])) {
               }">
                                 <div class="text-center">
                                     <p class="m-0">Scan the barcode below to make payment</p>
-                                    <img src="http://res.cloudinary.com/dgzmeamz8/image/upload/v1697441368/my_folder_name/xrirjhbwv299842ngoak.jpg" alt="" class="img-fluid w-25 m-0">
+                                    <img src="https://api.qrserver.com/v1/create-qr-code/?data=<?= $wallet['address'] ?>&size=300x300" alt="" class="img-fluid w-25 m-0">
                                 </div>
                                 <div class="mt-5">
                                     <p class="m-0">
@@ -123,7 +133,7 @@ if (!isset($_GET['wallet_id']) || !isset($_GET['amount'])) {
                                         address below
                                     </p>
                                     <div class="d-flex mt-2">
-                                        <input id="key-02" class="form-control me-3" value="TDU1iAxatb7qSezy78KBQQyAEFQxnHXJVW" readonly="">
+                                        <input id="key-02" class="form-control me-3" value=" <?= $wallet['address'] ?>" readonly="">
                                         <div>
                                             <!-- Button -->
                                             <button class="clipboard btn btn-link px-0" data-clipboard-target="#key-02" data-bs-toggle="tooltip" data-bs-title="Copy to clipboard" x-on:click="copyToClipboard(address)">
@@ -134,7 +144,7 @@ if (!isset($_GET['wallet_id']) || !isset($_GET['amount'])) {
                                     </div>
                                     <small class="d-block mt-1">
                                         <strong>Network Type:</strong>
-                                        USDC TRC20
+                                        <?= $wallet['title'] ?>
                                     </small>
                                 </div>
                                 <button type="button" class="btn btn-primary mt-5" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
@@ -145,21 +155,21 @@ if (!isset($_GET['wallet_id']) || !isset($_GET['amount'])) {
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h3 class="modal-title" id="exampleModalCenterTitle">Upload payment
-                                                    receipt</h3>
+                                                <h3 class="modal-title" id="exampleModalCenterTitle">Upload payment receipt</h3>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
-                                            <form method="post" action="/accountdeposit" enctype="multipart/form-data">
-                                                <input type="hidden" name="_token" value="GybFujKl3iopgdJQTshgS28drpFHIG1g65gFSP7v">
+                                            <form method="post" action="includes/depositsub.php" enctype="multipart/form-data">
+                                                <input type="hidden" name="submit" value="GybFujKl3iopgdJQTshgS28drpFHIG1g65gFSP7v">
                                                 <div class="modal-body m-0">
                                                     <div class="mb-3">
 
                                                         <input type="file" name="image" class="form-control" required="" accept="image/*">
                                                     </div>
-                                                    <input type="hidden" name="amt" value="100">
-                                                    <input type="hidden" name="wallet" value="TDU1iAxatb7qSezy78KBQQyAEFQxnHXJVW">
-                                                    <input type="hidden" name="account" value="USDC TRC20">
-                                                    <input type="hidden" name="depositorName" value="ekene samuel">
+                                                    <input type="hidden" name="amount" value="<?= $amount ?>">
+                                                    <input type="hidden" name="walletId" value=" <?= $wallet['id'] ?>">
+                                                    <input type="hidden" name="account" value="<?= $wallet['title'] ?>">
+                                                    <input type="hidden" name="depositorName" value="<?= $user['full_name'] ?>">
+                                                    <input type="hidden" name="depositorId" value="<?= $user['id'] ?>">
                                                 </div>
                                                 <div class="modal-footer m-0">
                                                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
@@ -175,7 +185,7 @@ if (!isset($_GET['wallet_id']) || !isset($_GET['amount'])) {
                                                     }
 
                                                     document.querySelectorAll(".amtx").forEach(function(el) {
-                                                        el.innerHTML = formatCurrency(parseFloat('100'));
+                                                        el.innerHTML = formatCurrency(parseFloat('<?= $amount ?>'));
                                                     });
                                                 </script>
                                             </form>

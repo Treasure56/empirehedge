@@ -20,7 +20,7 @@
                         <div class="avatar avatar-xxl avatar-circle mb-5">
                             <div wire:id="Ugt8bRLUny68utAlcvlQ">
                                 <form wire:submit.prevent="update">
-                                    <label class="d-block cursor-pointer">
+                                    <!-- <label class="d-block cursor-pointer">
                                         <span class="position-absolute bottom-0 end-0 m-0 text-bg-primary w-30px h-30px rounded-circle d-flex align-items-center justify-content-center">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="14" width="14">
                                                 <g>
@@ -32,8 +32,8 @@
                                             </svg>
                                         </span>
                                         <input type="file" wire:model="photo" class="d-none">
-                                    </label>
-                                    <img src="../png.pngtree.com/png-vector/20220521/ourlarge/pngtree-avatar-profile-icon-png-image_4644647.png" alt="Profile picture" class="avatar-img" width="112" height="112">
+                                    </label> -->
+                                    <img src="https://png.pngtree.com/png-vector/20220521/ourlarge/pngtree-avatar-profile-icon-png-image_4644647.png" alt="Profile picture" class="avatar-img" width="112" height="112">
                                 </form>
                             </div>
 
@@ -146,14 +146,14 @@
         <div class="col">
             <!-- Card -->
 
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-12">
                     <div class="py-4 alert alert-danger alert-dismissible fade show" role="alert">
                         Please fill atleast one of the payment option to proceed to the withdrawal screen
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <!--  -->
 
@@ -548,7 +548,7 @@
                                     <div class="alert alert-light mw-450px" role="alert">
                                         <h4 class="mb-3">Password requirements:</h4>
                                         <ul class="p-3 mb-0">
-                                            <li>Minimum 8 characters long - the more, the better</li>
+                                            <li>Minimum 6 characters long - the more, the better</li>
                                             <li>At least one lowercase character</li>
                                             <li>At least one uppercase character</li>
                                             <li>At least one number, symbol.</li>
@@ -614,20 +614,20 @@
           <small class="fs-6">Enter your ERC20 Address that will be used to withdraw your funds</small>
         </div> -->
                                     <div class="mb-3 col-md-6">
-                                        <label class="">USTD TRC20</label>
-                                        <input type="text" name="ust" class="form-control " placeholder="Enter USTDRC20 Address" value="">
-                                        <small class="fs-6">Enter your USTD TRC20 Address that will be used to withdraw your funds</small>
+                                        <label class="">USDT TRC20</label>
+                                        <input type="text" name="ust" class="form-control " placeholder="Enter USDTRC20 Address" value="<?= $user['acc_ust'] ?>">
+                                        <small class="fs-6">Enter your USDT TRC20 Address that will be used to withdraw your funds</small>
                                     </div>
 
                                     <div class="mb-3 col-md-6">
                                         <label class="">Bitcoin wallet address</label>
-                                        <input type="text" name="btc" class="form-control " placeholder="Enter Bitcoin wallet Address" value="">
+                                        <input type="text" name="btc" class="form-control " placeholder="Enter Bitcoin wallet Address" value="<?= $user['acc_btc'] ?>">
                                         <small class="fs-6">Enter your USDC TRC20 Address that will be used to withdraw your funds</small>
                                     </div>
 
                                     <div class="mb-3 col-md-6">
                                         <label>Ethereum wallet address</label>
-                                        <input type="text" name="eth" class="form-control" placeholder="Enter Ethereum wallet Address" value="">
+                                        <input type="text" name="eth" class="form-control" placeholder="Enter Ethereum wallet Address" value="<?= $user['acc_eth'] ?>">
                                         <small class="fs-6">Enter your Ethereum wallet Address that will be used to withdraw your
                                             funds</small>
                                     </div>

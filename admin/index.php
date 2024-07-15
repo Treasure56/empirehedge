@@ -61,7 +61,7 @@
             </div>
             <div class="flex gap-2 rounded-3xl py-2 px-5 font-semibold items-center hover:text-primary hover:bg-blue-100">
               <i class="fa-solid fa-sack-dollar"></i>
-              <a href="dashboard.php" class="text-sm">Investment</a>
+              <a href="investments.php" class="text-sm">Investment</a>
             </div>
 
             <div class="flex gap-2 rounded-3xl py-2 px-5 font-semibold items-center hover:text-primary hover:bg-blue-100">

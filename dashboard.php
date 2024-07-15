@@ -1,23 +1,23 @@
 <?php include 'partials/dashboard_scripts.php'; ?>
 
-        <div class="container-fluid mb-5">
-            <!-- Title -->
-            <h1 class="h2">
-                Welcome, <span style="text-transform: capitalize;"><?= $user['full_name'] ?></span>
-            </h1>
-            <div>
+<div class="container-fluid mb-5">
+    <!-- Title -->
+    <h1 class="h2">
+        Welcome, <span style="text-transform: capitalize;"><?= $user['full_name'] ?></span>
+    </h1>
+    <div>
+    </div>
+    <div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="py-4 alert alert-primary alert-dismissible fade show" role="alert">
+                Welcome back to empirehedge.co !
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-            <div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="py-4 alert alert-primary alert-dismissible fade show" role="alert">
-                        Welcome back to empirehedge.co !
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                </div>
-            </div>
-            <!-- <div class="row">
+        </div>
+    </div>
+    <!-- <div class="row">
       <div class="col-12">
           <div class="py-4 alert alert-info alert-dismissible fade show" role="alert">
               Join   empirehedge.co  and invest with confidence
@@ -25,87 +25,87 @@
           </div>
       </div>
   </div> -->
-            <div class="row">
-                <div class="col-lg-3">
-                    <!-- Card -->
-                    <div class="card border-0">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col d-flex justify-content-between">
-                                    <div>
-                                        <!-- Title -->
-                                        <h5 class="d-flex align-items-center text-uppercase text-muted fw-semibold mb-2">
-                                            <span class="legend-circle-sm bg-primary"></span>
-                                            Account Balance
-                                        </h5>
+    <div class="row">
+        <div class="col-lg-3">
+            <!-- Card -->
+            <div class="card border-0">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col d-flex justify-content-between">
+                            <div>
+                                <!-- Title -->
+                                <h5 class="d-flex align-items-center text-uppercase text-muted fw-semibold mb-2">
+                                    <span class="legend-circle-sm bg-primary"></span>
+                                    Account Balance
+                                </h5>
 
-                                        <!-- Subtitle -->
-                                        <h2 class="mb-0 main__bals">
-                                            0
-                                            <script>
-                                                function formatCurrency(amount) {
-                                                    return new Intl.NumberFormat('en-US', {
-                                                        style: 'currency',
-                                                        currency: 'USD'
-                                                    }).format(amount);
-                                                }
-                                                document.querySelector(".main__bals").innerHTML = formatCurrency(parseFloat("0"))
-                                            </script>
-                                        </h2>
+                                <!-- Subtitle -->
+                                <h2 class="mb-0 main__bals">
+                                    <?= $user['balance'] ?>
+                                    <script>
+                                        function formatCurrency(amount) {
+                                            return new Intl.NumberFormat('en-US', {
+                                                style: 'currency',
+                                                currency: 'USD'
+                                            }).format(amount);
+                                        }
+                                        document.querySelector(".main__bals").innerHTML = formatCurrency(parseFloat(" <?= $user['balance'] ?>"))
+                                    </script>
+                                </h2>
 
-                                        <a href="deposit.php" class="fs-6 btn-link mb-0 mt-2 mr-3">
-                                            Deposit
-                                        </a>
-                                        <!-- <span class="">-</span>
+                                <a href="deposit.php" class="fs-6 btn-link mb-0 mt-2 mr-3">
+                                    Deposit
+                                </a>
+                                <!-- <span class="">-</span>
                                                              
                               <a href="/transfer-funds" class="fs-6 btn-link mb-0 mt-2 ml-3">
                                   Transfer
                               </a> -->
-                                    </div>
+                            </div>
 
-                                    <span class="text-primary">
-                                        <i class="fi fi-sr-wallet"></i>
-                                    </span>
-                                </div>
-                            </div> <!-- / .row -->
+                            <span class="text-primary">
+                                <i class="fi fi-sr-wallet"></i>
+                            </span>
                         </div>
-                    </div>
+                    </div> <!-- / .row -->
                 </div>
-                <div class="col-lg-3">
-                    <!-- Card -->
-                    <div class="card border-0">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col d-flex justify-content-between">
-                                    <div>
-                                        <!-- Title -->
-                                        <h5 class="d-flex align-items-center text-uppercase text-muted fw-semibold mb-2">
-                                            <span class="legend-circle-sm bg-success"></span>
-                                            Total Profit
-                                        </h5>
-                                        <!-- Subtitle -->
-                                        <h2 class="mb-0">
-                                            $0.00
-                                        </h2>
-                                        <!-- Comment -->
-                                        <a href="index.php">
-                                            <p class="fs-6 btn-link mb-0 mt-2">
-                                                View profit history
-                                            </p>
-                                        </a>
-                                    </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <!-- Card -->
+            <div class="card border-0">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col d-flex justify-content-between">
+                            <div>
+                                <!-- Title -->
+                                <h5 class="d-flex align-items-center text-uppercase text-muted fw-semibold mb-2">
+                                    <span class="legend-circle-sm bg-success"></span>
+                                    Total Profit
+                                </h5>
+                                <!-- Subtitle -->
+                                <h2 class="mb-0">
+                                    $ <?= getUserProfit($connect, $user['id']) ?>
+                                </h2>
+                                <!-- Comment -->
+                                <a href="profit-history.php">
+                                    <p class="fs-6 btn-link mb-0 mt-2">
+                                        View profit history
+                                    </p>
+                                </a>
+                            </div>
 
-                                    <span class="text-success">
-                                        <i class="fi fi-br-chat-arrow-grow"></i>
-                                    </span>
-                                </div>
-                            </div> <!-- / .row -->
+                            <span class="text-success">
+                                <i class="fi fi-br-chat-arrow-grow"></i>
+                            </span>
                         </div>
-                    </div>
+                    </div> <!-- / .row -->
                 </div>
-                <?php 
-                /**
-                 * <div class="col-lg-3">
+            </div>
+        </div>
+        <?php
+        /**
+         * <div class="col-lg-3">
                     <!-- Card -->
                     <div class="card border-0">
                         <div class="card-body">
@@ -137,12 +137,12 @@
                         </div>
                     </div>
                 </div>
-                 */
-                ?>
+         */
+        ?>
 
-              <?php 
-              /**
-               *   <div class="col-lg-3">
+        <?php
+        /**
+         *   <div class="col-lg-3">
                     <!-- Card -->
                     <div class="card border-0">
                         <div class="card-body">
@@ -174,75 +174,75 @@
                         </div>
                     </div>
                 </div>
-               */
-              ?>
-                <div class="col-lg-3">
-                    <!-- Card -->
-                    <div class="card border-0">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col d-flex justify-content-between">
-                                    <div>
-                                        <!-- Title -->
-                                        <h5 class="d-flex align-items-center text-uppercase text-muted fw-semibold mb-2">
-                                            <span class="legend-circle-sm bg-success"></span>
-                                            Total Deposited
-                                        </h5>
-                                        <!-- Subtitle -->
-                                        <h2 class="mb-0">
-                                            $0.00
-                                        </h2>
-                                        <!-- Comment -->
-                                        <a href="accounthistory.php">
-                                            <p class="fs-6 btn-link mb-0 mt-2">
-                                                View deposits
-                                            </p>
-                                        </a>
-                                    </div>
+         */
+        ?>
+        <div class="col-lg-3">
+            <!-- Card -->
+            <div class="card border-0">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col d-flex justify-content-between">
+                            <div>
+                                <!-- Title -->
+                                <h5 class="d-flex align-items-center text-uppercase text-muted fw-semibold mb-2">
+                                    <span class="legend-circle-sm bg-success"></span>
+                                    Total Deposited
+                                </h5>
+                                <!-- Subtitle -->
+                                <h2 class="mb-0">
+                                    $<?= getUserDeposits($connect, $user['id']) ?>
+                                </h2>
+                                <!-- Comment -->
+                                <a href="accounthistory.php">
+                                    <p class="fs-6 btn-link mb-0 mt-2">
+                                        View deposits
+                                    </p>
+                                </a>
+                            </div>
 
-                                    <span class="text-success">
-                                        <i class="fi fi-sr-piggy-bank"></i>
-                                    </span>
-                                </div>
-                            </div> <!-- / .row -->
+                            <span class="text-success">
+                                <i class="fi fi-sr-piggy-bank"></i>
+                            </span>
                         </div>
-                    </div>
+                    </div> <!-- / .row -->
                 </div>
-                <div class="col-lg-3">
-                    <!-- Card -->
-                    <div class="card border-0">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col d-flex justify-content-between">
-                                    <div>
-                                        <!-- Title -->
-                                        <h5 class="d-flex align-items-center text-uppercase text-muted fw-semibold mb-2">
-                                            <span class="legend-circle-sm bg-danger"></span>
-                                            Total Withdrawal
-                                        </h5>
-                                        <!-- Subtitle -->
-                                        <h2 class="mb-0">
-                                            $0.00
-                                        </h2>
-                                        <!-- Comment -->
-                                        <a href="index.php">
-                                            <p class="fs-6 btn-link mb-0 mt-2">
-                                                View withdrawals
-                                            </p>
-                                        </a>
-                                    </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <!-- Card -->
+            <div class="card border-0">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col d-flex justify-content-between">
+                            <div>
+                                <!-- Title -->
+                                <h5 class="d-flex align-items-center text-uppercase text-muted fw-semibold mb-2">
+                                    <span class="legend-circle-sm bg-danger"></span>
+                                    Total Withdrawal
+                                </h5>
+                                <!-- Subtitle -->
+                                <h2 class="mb-0">
+                                    $<?= getUserWithdrawals($connect, $user['id']) ?>
+                                </h2>
+                                <!-- Comment -->
+                                <a href="withdrawal-history.php">
+                                    <p class="fs-6 btn-link mb-0 mt-2">
+                                        View withdrawals
+                                    </p>
+                                </a>
+                            </div>
 
-                                    <span class="text-danger">
-                                        <i class="fi fi-sr-coins"></i>
-                                    </span>
-                                </div>
-                            </div> <!-- / .row -->
+                            <span class="text-danger">
+                                <i class="fi fi-sr-coins"></i>
+                            </span>
                         </div>
-                    </div>
+                    </div> <!-- / .row -->
                 </div>
-               <?php
-               /**
-                *  <div class="col-lg-3">
+            </div>
+        </div>
+        <?php
+        /**
+         *  <div class="col-lg-3">
                     <div class="card border-0">
                         <!-- Card body -->
                         <div class="card-body">
@@ -273,95 +273,209 @@
                         </div>
                     </div>
                 </div>
-                */
-               ?>
+         */
+        ?>
 
+    </div>
+
+    <?php
+    $uid = $user['id'];
+    ?>
+    <div class="mt-4 row">
+        <div class="col-12">
+            <div>
+                <h5 class="text-primary h5">Active Plan(s)
+                    <span class="text-base count">(
+                        <?= mysqli_num_rows(mysqli_query($connect, "SELECT * FROM investments WHERE user_id = '$uid' AND pending = 1")) ?>
+                        )</span>
+                </h5>
             </div>
-
+        </div>
+        <div class="col-12">
             <div class="mt-4 row">
-                <div class="col-12">
-                    <div>
-                        <h5 class="text-primary h5">Active Plan(s)
-                            <span class="text-base count">(0)</span>
-                        </h5>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="mt-4 row">
-                        <div class="col-md-12">
-                            <div class="card">
+                <div class="col-md-12">
+                    <table class="table text-center">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Amount</th>
+                                <th>Payout Amount</th>
+                                <th>Plan</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Payment Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-                                <div class="text-center card-body py-4">
-                                    <i class="fi fi-sr-location-exclamation"></i>
-                                    <p>You do not have an active investment at the moment.</p>
-                                    <a href="invest.php" class="btn btn-primary">
-                                        Contribute Now
-                                    </a>
-                                </div>
+                            <?php
+                            $query = mysqli_query($connect, "SELECT * FROM investments WHERE user_id = '$uid' AND pending = 1 ORDER BY id DESC LIMIT 5");
+                            if (mysqli_num_rows($query) > 0) {
+                                while ($row = mysqli_fetch_assoc($query)) {
+                                    $id = $row['id'];
+                                    $amount = $row['amount'];
+                                    $payout_amount = $row['payout_amount'];
+                                    $planId = $row['plan_id'];
+                                    $plan = getQueryDetails($connect, "SELECT * FROM plans WHERE id = '$planId'");
+                                    $status = $row['pending'] == 1 ? 'Pending' : 'Completed';
+                                    $date_created = $row['created_at'];
+                                    $payout_at = $row['payout_at'];
+
+
+                            ?>
+
+                                    <tr>
+                                        <td>
+                                            <?= $id ?>
+                                        </td>
+                                        <td>
+                                            $<?= $amount ?>
+                                        </td>
+                                        <td>
+                                            $<?= $payout_amount ?>
+                                        </td>
+                                        <td>
+                                            <?= $plan['title'] ?>
+                                        </td>
+                                        <td>
+                                            <p class="<?= $status == 'Pending' ? 'text-warning' : 'text-success' ?>">
+                                                <?= $status ?>
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <?= formatDate($date_created) ?>
+                                        </td>
+                                        <td>
+                                            <?= formatDate($payout_at) ?>
+                                        </td>
+                                    </tr>
+
+                                <?php  }
+                            } else { ?>
+
+                                <!-- Render "No referrals yet" message when referral.length is 0 -->
+                                <tr>
+                                    <td class="py-5" colspan="7">
+                                        <div class="card">
+
+                                            <div class="text-center card-body py-4">
+                                                <i class="fi fi-sr-location-exclamation"></i>
+                                                <p>You do not have an active investment at the moment.</p>
+                                                <a href="invest.php" class="btn btn-primary">
+                                                    Contribute Now
+                                                </a>
+                                            </div>
 
 
 
 
-                            </div>
-                        </div>
-                    </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+
+
+
+                        </tbody>
+                    </table>
+
                 </div>
             </div>
+        </div>
+    </div>
 
 
-            <div class="mt-4 row">
-                <div class="col-12">
-                    <div class="d-flex justify-content-between">
-                        <h6 class="text-primary h5">
-                            Recent transactions
-                        </h6>
-                        <div class="">
-                            <a href="accounthistory.php" class="btn btn-primary btn-sm">
-                                View all transactions
-                            </a>
-                        </div>
-                    </div>
+    <div class="mt-4 row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between">
+                <h6 class="text-primary h5">
+                    Recent transactions
+                </h6>
+                <div class="">
+                    <a href="accounthistory.php" class="btn btn-primary btn-sm">
+                        View all transactions
+                    </a>
                 </div>
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table text-center">
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Amount</th>
-                                            <th>Payment mode</th>
-                                            <th>Status</th>
-                                            <th>Date created</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                    <table class="table text-center">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Amount</th>
+                                        <th>Payment mode</th>
+                                        <th>Status</th>
+                                        <th>Date created</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
+                                    <?php
+                                    $uid = $user['id'];
+                                    $query = mysqli_query($connect, "SELECT * FROM deposits WHERE user_id = '$uid' ORDER BY id DESC LIMIT 5");
+                                    if (mysqli_num_rows($query) > 0) {
+                                        while ($row = mysqli_fetch_assoc($query)) {
+                                            $id = $row['id'];
+                                            $amount = $row['amount'];
+                                            $wallet_id = $row['wallet_id'];
+                                            $wallet = getQueryDetails($connect, "SELECT * FROM wallets WHERE id = '$wallet_id'");
+                                            $status = $row['pending'] == 1 ? 'Pending' : 'Completed';
+                                            $date_created = $row['created_at'];
+
+
+                                    ?>
+
+                                            <tr>
+                                                <td>
+                                                    <?php echo $id; ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $amount; ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $wallet['title']; ?>
+                                                </td>
+                                                <td>
+                                                    <p class="<?= $status == 'Pending' ? 'text-warning' : 'text-success' ?>">
+                                                        <?php echo $status; ?>
+                                                    </p>
+                                                </td>
+                                                <td>
+                                                    <?php echo formatDate($date_created); ?>
+                                                </td>
+                                            </tr>
+
+                                        <?php  }
+                                    } else { ?>
 
                                         <!-- Render "No referrals yet" message when referral.length is 0 -->
                                         <tr>
-                                            <td colspan="3">
-                                                No record yet
+                                            <td class="py-5" colspan="4">
+                                                <i class="bi bi-database-fill-exclamation" style="font-size: 50px"></i>
+                                                <h5>No deposit history</h5>
                                             </td>
                                         </tr>
+                                    <?php } ?>
 
 
 
-
-                                    </tbody>
-                                </table>
-                                <div>
-                                    <div>
-                                    </div>
-
-                                </div>
+                                </tbody>
+                            </table>
+                        <div>
+                            <div>
                             </div>
 
                         </div>
                     </div>
+
                 </div>
-                <!-- <div class="col-12 d-flex">
+            </div>
+        </div>
+        <!-- <div class="col-12 d-flex">
       
       <div class="card border-0 flex-fill w-100">
           <div class="card-header border-0 card-header-space-between">
@@ -417,87 +531,87 @@
           </div>
       </div>
   </div> -->
+    </div>
+
+</div>
+
+<!-- Footer -->
+<footer class="mt-auto">
+    <div class="container-fluid mt-4 mb-6 text-muted">
+        <div class="row justify-content-between">
+            <div class="col">
+                All Rights Reserved © empirehedge.co 2023
             </div>
 
-        </div>
-
-        <!-- Footer -->
-        <footer class="mt-auto">
-            <div class="container-fluid mt-4 mb-6 text-muted">
-                <div class="row justify-content-between">
-                    <div class="col">
-                        All Rights Reserved © empirehedge.co 2023
-                    </div>
-
-                    <div class="col-auto">
-                        <div id="google_translate_element">
-                        </div>
-                    </div>
+            <div class="col-auto">
+                <div id="google_translate_element">
                 </div>
             </div>
-        </footer>
+        </div>
+    </div>
+</footer>
 
-        <!-- JAVASCRIPT-->
-        <!-- Theme JS -->
+<!-- JAVASCRIPT-->
+<!-- Theme JS -->
 
-        <script src="assets/js/theme.bundle.js"></script>
-        <script type="text/javascript" src="../translate.google.com/translate_a/elementa0d8.js?cb=googleTranslateElementInit">
-        </script>
+<script src="assets/js/theme.bundle.js"></script>
+<script type="text/javascript" src="../translate.google.com/translate_a/elementa0d8.js?cb=googleTranslateElementInit">
+</script>
 
-        <script type="text/javascript">
-            function googleTranslateElementInit() {
-                new google.translate.TranslateElement({
-                    pageLanguage: 'en'
-                }, 'google_translate_element');
-            }
-        </script>
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'en'
+        }, 'google_translate_element');
+    }
+</script>
 
-        <script src="livewire/livewire6406.html?id=fe747446aa84856d8b66" data-turbo-eval="false" data-turbolinks-eval="false"></script>
-        <script data-turbo-eval="false" data-turbolinks-eval="false">
-            window.livewire = new Livewire();
-            window.Livewire = window.livewire;
-            window.livewire_app_url = '';
-            window.livewire_token = 'GybFujKl3iopgdJQTshgS28drpFHIG1g65gFSP7v';
-            window.deferLoadingAlpine = function(callback) {
-                window.addEventListener('livewire:load', function() {
-                    callback();
-                });
-            };
-            let started = false;
-            window.addEventListener('alpine:initializing', function() {
-                if (!started) {
-                    window.livewire.start();
-                    started = true;
-                }
-            });
-            document.addEventListener("DOMContentLoaded", function() {
-                if (!started) {
-                    window.livewire.start();
-                    started = true;
-                }
-            });
-        </script>
-        <!-- <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script> -->
-        <script src="assets/ext/dist/toastr.min.js"></script>
-        <script type="text/javascript">
-            var _smartsupp = _smartsupp || {};
-            _smartsupp.key = '72b452f3afab8a71a5a98a43dc4bf4ae47fee7c5';
-            window.smartsupp || (function(d) {
-                var s, c, o = smartsupp = function() {
-                    o._.push(arguments)
-                };
-                o._ = [];
-                s = d.getElementsByTagName('script')[0];
-                c = d.createElement('script');
-                c.type = 'text/javascript';
-                c.charset = 'utf-8';
-                c.async = true;
-                c.src = '../www.smartsuppchat.com/loaderd41d.js?';
-                s.parentNode.insertBefore(c, s);
-            })(document);
-        </script>
-        <noscript> Powered by <a href=%e2%80%9chttps_/www.smartsupp.html target=“_blank”>Smartsupp</a></noscript>
-    </main> <!-- / main -->
+<script src="livewire/livewire6406.html?id=fe747446aa84856d8b66" data-turbo-eval="false" data-turbolinks-eval="false"></script>
+<script data-turbo-eval="false" data-turbolinks-eval="false">
+    window.livewire = new Livewire();
+    window.Livewire = window.livewire;
+    window.livewire_app_url = '';
+    window.livewire_token = 'GybFujKl3iopgdJQTshgS28drpFHIG1g65gFSP7v';
+    window.deferLoadingAlpine = function(callback) {
+        window.addEventListener('livewire:load', function() {
+            callback();
+        });
+    };
+    let started = false;
+    window.addEventListener('alpine:initializing', function() {
+        if (!started) {
+            window.livewire.start();
+            started = true;
+        }
+    });
+    document.addEventListener("DOMContentLoaded", function() {
+        if (!started) {
+            window.livewire.start();
+            started = true;
+        }
+    });
+</script>
+<!-- <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script> -->
+<script src="assets/ext/dist/toastr.min.js"></script>
+<script type="text/javascript">
+    var _smartsupp = _smartsupp || {};
+    _smartsupp.key = '72b452f3afab8a71a5a98a43dc4bf4ae47fee7c5';
+    window.smartsupp || (function(d) {
+        var s, c, o = smartsupp = function() {
+            o._.push(arguments)
+        };
+        o._ = [];
+        s = d.getElementsByTagName('script')[0];
+        c = d.createElement('script');
+        c.type = 'text/javascript';
+        c.charset = 'utf-8';
+        c.async = true;
+        c.src = '../www.smartsuppchat.com/loaderd41d.js?';
+        s.parentNode.insertBefore(c, s);
+    })(document);
+</script>
+<noscript> Powered by <a href=%e2%80%9chttps_/www.smartsupp.html target=“_blank”>Smartsupp</a></noscript>
+</main> <!-- / main -->
 
 
 </body>
